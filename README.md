@@ -1,173 +1,178 @@
 # Project4_Group4_Immigration
-Project 4 output for Group 4 : Felipe Suarez, Sunilduth Baichoo, Nazim Bendjaballah
 
-0) how to run the front end ?
+**Project 4 Output for Group 4**  
+**Group Members:** Felipe Suarez, Sunilduth Baichoo, Nazim Bendjaballah
 
-    - run api_app_project.py
-    - run api_deployment_model.py
-    - run the index.html
+---
 
+## Overview
 
+This project analyzes immigration trends to Canada from 203 countries over the period 2015 to 2023. We examine how different macroeconomic, social, and other indicators influence the decision to immigrate to Canada. The analysis leverages a rich dataset consisting of 49 features along with a target variable (immigration per 100K persons).
 
-1) Goal and Reasearch question
-Analyze immigration trends to Canada and examine the correlation between 
-the decision immigration to canada and different indicators (macroeconomic, social, and other).
-49 indicators will be used and will be compared to the immigration flow to canada (ratio of immigrant for each 100K people of the origin country population)
+Our workflow started with a baseline model using Linear Regression, then improved predictive performance with a Random Forest model. We further fine-tuned our models by selecting the top 5 influential features. Recognizing that not all countries share the same immigration drivers, we used KMeans clustering to segment the countries into 4 clusters. For each cluster, both Linear Regression and Random Forest models were developed using cluster-specific top 5 features to capture local trends better.
 
-    1.1) Reasearch question
-        What are the indicators that motivate people to immigrate from their country ? (using canada as an example)
+---
 
-        - Analysis of Indicator Importance: 
-        Which socio-economic, demographic, and macroeconomic factors, as identified through machine learning feature selection techniques, most strongly predict the decision to immigrate?
+## Research Questions
 
-        - Clustering and Profile Identification: 
-        Can unsupervised machine learning methods, such as clustering, uncover distinct immigrant profiles based on the identified indicators, and what motivational patterns emerge within these clusters?
+1. **What are the indicators that motivate people to immigrate from their country?**  
+   - **Analysis of Indicator Importance:**  
+     Which socio-economic, demographic, and macroeconomic factors, as identified through machine learning feature selection techniques, most strongly predict the decision to immigrate?
+     
+   - **Clustering and Profile Identification:**  
+     Can unsupervised machine learning methods, such as clustering, uncover distinct immigrant profiles based on the identified indicators, and what motivational patterns emerge within these clusters?
+     
+   - **Comparative Model Evaluation:**  
+     How do different supervised machine learning models compare in ranking the influence of key indicators on the likelihood of immigration?
 
-        - Comparative Model Evaluation: 
-        How do different supervised machine learning models compare in ranking the influence of key indicators on the likelihood of immigration?
+---
 
+## Data Sources
 
-    1.2) data sources
-    Datasets : Below are the dataset sources that will be used
-        Immigration data : IRCC (immigration, refugees and citizenship Canada)
-        Macro economic and social Data : World Bank
-        Other Indicators : Transparency international, Economic and peace 
-
-
-2) repository structure
-    
-    Files in the main directory
-        - api_app_project.py : you must run this server to get data
-        - api_deployment_model.py : you must run this server to run the deployed ML modele
-        - db_canada_immigration.sqlite
-        - index.html : to run the front end
-
-    Folders
-        - Data_collection_ETL_DataB_creation : 4 notebooks for data collection, cleaning, transformation and database creation
-        - Output : csv and xls files from data collection and transformation
-        - Output_analysis : csv and xls files from different analysis
-        - deployment : includes 2 files for deployment : app.js and deploy.html
-        - ML_analysis : 3 jupyter notenooks for Machine learning analysis and model development
-        - Model_pkl : 3 machine learning models deployed.
-        - frontend : contains all the package to run index.html page including : JS and CSS files + pkl files for modele deployment
-
-
-3) ENVIRONMENTS & CODE PRESENTATION
-
-    3.1) Environemnts 
-
-        3.1.1) DATA COLLECTION, TRANSORMATION AND API
-
-            3.1.1.1)
-                import pandas as pd
-                import pathlib as path
-                import requests
-                import json
-                from pprint 
-                import numpy as np
-                from io import StringIO
-                import zipfile
-                import io
-                from scipy.stats 
-                sqlalchemy 
-               from datetime import timedelta, datetime
-                from dateutil.relativedelta 
-                from flask           
-                from collections
-
-        3.1.2) Machine learning
-                import matplotlib.pyplot as plt
-                import seaborn as sns
-                import sklearn
-                import joblib
-                import seaborn as sns
-               import joblib
+- **Immigration Data:**  
+  IRCC (Immigration, Refugees and Citizenship Canada) – [CSV Source](https://www.ircc.canada.ca/opendata-donneesouvertes/data/ODP-PR-Citz.csv)
   
-        3.1.3) Front end
+- **Macroeconomic and Social Data:**  
+  World Bank (via API)
+
+- **Other Indicators:**  
+  - Transparency International (Corruption Perception Index)  
+  - Economics and Peace (Global Peace Index)  
+  - Wikipedia for additional contextual data
+
+---
+
+## How to Run the Front End
+
+To launch the front end of the project, follow these steps:
+1. **Run the API Servers:**  
+   - Execute `api_app_project.py` to start the data API server.  
+   - Execute `api_deployment_model.py` to start the model deployment server.
+2. **Launch the Web Interface:**  
+   - Open `index.html` (preferably served via a local web server) to interact with the application and view real-time predictions.
+
+---
+
+## Repository Structure
+
+Project4_Group4_Immigration/ <br>
+│ <br>
+├── api_app_project.py # API for data access (Flask server) <br>
+├── api_deployment_model.py # API for model predictions (Flask server)<br> 
+├── db_canada_immigration.sqlite <br>
+├── index.html # Front-end HTML page for user interaction <br>
+│ <br>
+├── Data_collection_ETL_DataB_creation/<br>
+│ <br>
+├── Data_collection.ipynb # Data collection notebook <br>
+│ <br>
+├── data_compiling.ipynb # Data cleaning and transformation notebook <br>
+│ <br>
+└── db_create.ipynb # Database creation using SQLAlchemy <br>
+│ <br>
+├── Output/ # CSV and XLS files from data collection/transformation <br>
+│ <br>
+├── Output_analysis/ # Analysis outputs (CSV and XLS) <br>
+│ <br>
+├── deployment/ # Front-end deployment files <br>
+│ <br>
+├── app.js # JavaScript for front-end API interaction <br>
+│ <br>
+└── deploy.html # Alternate front-end file if needed <br>
+│ <br>
+├── ML_analysis/ # Machine learning analysis and model development notebooks <br>
+│ <br>
+├── ML_analysis_SL_all_countries_all_features.ipynb # Baseline ML analysis <br>
+│ <br>
+├── ML_analysis_SL_All_countries_Top5_features.ipynb # Fine-tuning using top 5 features <br>
+│ <br>
+└── ML_analysis_clustered_data_SL_Top5_features.ipynb # Cluster-specific ML analysis <br>
+│ <br>
+├── Model_pkl/ # Serialized machine learning models (joblib files) <br>
+│ <br>
+└── frontend/ # Contains all assets to run the index.html page (JS, CSS, etc.)<br>
 
 
-    3.2) CODE PRESENTATION
+---
 
-        3.2.1) DATA COLLECTION, TRANSFORMATION and API construction
+## Environments & Code Presentation
 
-            3.2.1.1) data collection
-            use Data_collection_ETL_DataB_creation\Data_collection.ipynb
+### 1. Data Collection, Transformation, and API Construction
 
-                - for immigration data 
-                    source : Immigration, refugees and citizenship of Canada
-                    type : CSV file
-                    Access : https://www.ircc.canada.ca/opendata-donneesouvertes/data/ODP-PR-Citz.csv
+- **Technologies & Libraries:**  
+  - **Python Modules:** pandas, numpy, sqlalchemy, requests, json, zipfile, io, datetime, flask, etc.
+  - **Notebooks:**  
+    - `Data_collection.ipynb` for data retrieval from various sources.
+    - `data_compiling.ipynb` for data cleaning, transformation, and preparation.
+    - `db_create.ipynb` for building the SQLite database using SQLAlchemy.
+  - **API Construction:**  
+    - `api_app_project.py` uses Flask to create a server at `http://127.0.0.1:5000` which describes the API endpoints and data access possibilities.
 
-                - for macro-economic data 
-                    source : World bank
-                    type : API
-                    Access : https://api.worldbank.org/v2/country/XXX/indicator/XX.XXX.XXX.XX?date=XXXX:XXXX&format=json
+### 2. Machine Learning
 
-                - countries
-                countries are selected from immigration list merged with countries to extract the iso3code Example Canada = CAN
-                    - indicators : you can add any indicator a the list . this list will be used to loop
-                    - We need an intermediate data to link the country name (in immigration data) and country code (used by the API)
-                        this link is provided by a datafram countries 
-                        source : World bank
-                        type : API
-                        Access : https://api.worldbank.org/v2/country?format=json
+- **Technologies & Libraries:**  
+  - **Python Modules:** matplotlib, seaborn, scikit-learn, joblib, etc.
+  - **Notebooks:**  
+    - `ML_analysis_SL_all_countries_all_features.ipynb` for initial supervised learning.
+    - `ML_analysis_SL_All_countries_Top5_features.ipynb` for model fine-tuning using the top 5 features.
+    - `ML_analysis_clustered_data_SL_Top5_features.ipynb` for clustering countries and building cluster-specific models.
 
-                - Extract Corruption perception indicator
-                    source : https://images.transparencycdn.org/images/CPI2023_FullDataSet.zip
-                    from webpage : https://www.transparency.org/en/cpi/2023/media-kit
-                    extract sheet : CPI 2023
-                    data source extract a zip file => xls file
+### 3. Front End
 
-                - Extract Global Peace Index data
-                    source Wikidepia : https://en.wikipedia.org/wiki/Global_Peace_Index
-                    the full data and the report is available as PDF from the Economics And Peace organization
-                    link : https://www.economicsandpeace.org/wp-content/uploads/2023/09/GPI-2023-Web.pdf
+- **Technologies:**  
+  - HTML, JavaScript (app.js), and CSS.
+- **Deployment:**  
+  - Run the API servers (`api_app_project.py` and `api_deployment_model.py`) and then open `index.html` in a browser to interact with the model.
 
-            3.2.2.2) data cleaning and transformation
-            use Data_collection_ETL_DataB_creation\data_compiling.ipynb
+---
 
-                => Data cleaning, transformation and loading
-                    drop rows, drop columns, rename columns, replace countries names, map months, change data type, replace empty values, replace NAN values, reset index,  pivot columns, unpivot columns (melt)
+## How to Get Started
 
-                => outputs
-                    - csv countries_UN_referential: Countries list United Nations referential 
-                    - csv immigrants_by_country_monthly: immigration by country and by month from 2015 to 2024
-                    - csv macro_economic_data: selected indicators for each country and by year from 2015 to 2024
-                    - csv Global_Peace_Index : data for this indicator for 2023
-                    - csv corruption_perception_index : data for this indicator for 2023
-                    - csv full_indicators_by_country_by_year_long
-                    - csv full_indicators_by_country_by_year
-                    - csv full_indicators_by_country
+1. **Clone the Repository:**
 
-            3.2.1.3) creation database
-            use Data_collection_ETL_DataB_creation\db_create.ipynb
+   ```bash
+   git clone https://github.com/SunilduthBaichoo/Project4_Group4_Immigration_to_canada.git
+   cd Project4_Group4_Immigration_to_canada
+   ```
 
-            DATA BASE Type : sqlite
-                Created by : SQLAlechemy
-                Inputs : csv files, from Data cllection and trnaformation step
-                declarative_base method
-                Output  db_canada_immigration, 7 tables : countries, immigration, macrodata, pci, gpi, clusters, indicators_clusters
-            
-            3.2.1.4) creation API
-                use api_app_project.py
+2. **Set Up the Environment:**
 
-                Use of Flask 
-                use of “automap_base” method
-                create a server : http://127.0.0.1:5000
-                it describes the API’s possibilities
+Create and activate a virtual environment, then install the required dependencies:
 
-        3.2.2) machine learning
-            3.2.2.1) ML_analysis and model selection using Supervised Learning
-            use ML_analysis/ML_analysis_SL_all_countries_all_features.ipynb
+    ```bash
+    python -m venv venv
+    source venv/bin/activate      # On Windows: venv\Scripts\activate
+    pip install -r requirements.txt
+    ```
 
-            3.2.2.2) ML model fine-tuning using top 5 features 
-            use ML_analysis/ML_analysis_SL_All_countries_Top5_features.ipynb
+3. **Run the API Servers:**
+```bash
+python api_app_project.py
+python api_deployment_model.py
+```
 
-            3.2.2.3) Clustering of countries using unsupervised learning and developing models using Supervised learning
-            use ML_analysis/ML_analysis_clustered_data_SL_Top5_features.ipynb
+4. **Launch the Front End:**
+Open index.html in your browser. For best results, serve it using a local web server:
+```bash
+python -m http.server 8000
+```
+Then, navigate to http://localhost:8000/index.html.
 
 
-        3.2.3) Front end
-            run api_app_project.py
-            run api_deployment_model.py
-            run the index.html
+---
+## Presentation Summary
+This README is designed to serve not only as a guide for setting up and running the project but also as a presentation of our work. We have:
+
+- Established baseline models using Linear Regression.
+- Improved predictions using Random Forest and fine-tuned the model with top 5 influential features.
+- Employed clustering (KMeans) to segment 203 countries into 4 groups, allowing for cluster-specific modeling.
+- Deployed our models via a Flask API with a web-based front end for real-time predictions.
+Our work demonstrates a comprehensive approach to analyzing and forecasting immigration trends to Canada by integrating data collection, advanced machine learning, and practical deployment strategies.
+
+---
+
+## Future Improvements
+- Enhance feature engineering and integrate additional dynamic data sources.
+- Experiment with ensemble methods and further refine cluster-specific models.
+- Expand deployment to cloud platforms for broader accessibility and scalability.
+- Continuously update the models with new data to improve forecasting accuracy.
